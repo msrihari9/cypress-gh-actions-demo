@@ -1,20 +1,24 @@
-name: Run Cypress Tests
+name: Cypress Tests
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
+    branches: [main]
 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        environment: [dev, prod] # Run tests for both environments
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Use Node.js 18
         uses: actions/setup-node@v4
         with:
           node-version: 18
@@ -23,26 +27,14 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Cypress Tests
-        run: npx cypress run
-
-      - name: Upload Cypress Screenshots (on failure)
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots
-
-      - name: Upload Cypress Videos
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: cypress-videos
-          path: cypress/videos
+      - name: Run Cypress tests (headless) on ${{ matrix.environment }}
+        env:
+          ENV: ${{ matrix.environment }}
+        run: npx cypress run --headless --browser chrome
