@@ -2,7 +2,7 @@ const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: 'https://dev.leaguelens.proximabiz.com/auth',
+    baseUrl: 'https://example.cypress.io',
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
