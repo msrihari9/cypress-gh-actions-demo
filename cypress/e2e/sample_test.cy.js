@@ -1,6 +1,6 @@
 describe('My First Test', () => {
     it('Visits example site', () => {
-      cy.visit('https://dev.leaguelens.proximabiz.com/')
+      cy.visit('https://example.cypress.io')
       cy.contains('type').click()
       cy.url().should('include', '/commands/actions')
       cy.get('.action-email')
