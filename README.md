@@ -135,6 +135,19 @@ describe('My First Cypress Test', () => {
 });
 ```
 
+## 🧪 Run Cypress Tests (Headless)
+For Dev:
+```bash
+ENV=dev npx cypress run --headless --browser chrome
+```
+
+For Prod:
+```bash
+ENV=prod npx cypress run --headless --browser chrome
+```
+✅ You can also use --browser firefox or --browser electron as needed.
+
+
 ## 📦 Requirements
 ```bash
 Node.js ≥ 14

@@ -1,0 +1,8 @@
+{
+    "baseUrl": "https://dev.example.com",
+    "env": {
+      "login_user": "devUser",
+      "login_password": "devPass"
+    }
+  }
+  

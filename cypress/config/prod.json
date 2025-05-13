@@ -1,0 +1,8 @@
+{
+    "baseUrl": "https://www.example.com",
+    "env": {
+      "login_user": "prodUser",
+      "login_password": "prodPass"
+    }
+  }
+  
